@@ -1,4 +1,42 @@
 set nocompatible
+
+set incsearch 
+set ignorecase
+set shiftwidth=8
+set tabstop=8
+set shiftwidth=8
+set expandtab
+set number
+set autoindent
+"""""""""""""""""Vim语法""""""""""""""""""""""""""""""
+"
+"       条件判断: == 
+"       if <...>
+"               
+"       elseif <...>
+"               
+"       endif
+"
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""Taglist""""""""""""""""""""""""""""""
+"
+"       使用:TlistOpen打开taglist窗口
+"       使用:TlistClose关闭
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Ctags_Cmd='ctags'
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_Right_Window = 1
+
+map <silent> <leader>tl :TlistToogle<cr>
+
+"""""""""""""""""自动更正
+iab sturct struct
+
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
