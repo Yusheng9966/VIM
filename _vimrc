@@ -1,13 +1,31 @@
 set nocompatible
+set fencs=ucs-bom,utf8,gbk,cp936
 
-set incsearch 
-set ignorecase
+"""""""""""""""""""""""缩进""""""""""""""""""""""""""
 set shiftwidth=8
 set tabstop=8
-set shiftwidth=8
 set expandtab
-set number
 set autoindent
+
+"""""""""""""""""""""""显示""""""""""""""""""""""""""
+set number
+
+"""""""""""""""""""""""Search""""""""""""""""""""""""
+set incsearch 
+set ignorecase
+set incsearch
+
+
+"""""""""""""""""""""""filetype""""""""""""""""""""""""
+filetype on
+filetype plugin on
+filetype indent on
+"""markdown文件使用utf8编码
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}  set fenc=utf8 sw=4 ts=4 
+
+
+
+
 """""""""""""""""Vim语法""""""""""""""""""""""""""""""
 "
 "       条件判断: == 
