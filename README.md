@@ -17,6 +17,23 @@ VIM帮助中对配置文件位置的说明
 在windows中没有必要每个用户有各自的配置文件。
 所以配置文件目录选择在`$VIM/_vimrc`。也就是将_vimrc将放到vim目录下就行了。
 
+
+
+* VIM插件的目录位置
+
+VIM帮助中对插件的目录位置说明如下：
+
+    system		plugin directory ~
+    Unix		~/.vim/plugin/
+    PC and OS/2	$HOME/vimfiles/plugin or $VIM/vimfiles/plugin
+    Amiga		s:vimfiles/plugin
+    Macintosh	$VIM:vimfiles:plugin
+    Mac OS X	~/.vim/plugin/
+    RISC-OS		Choices:vimfiles.plugin
+
+插件目录无论选择哪个位置，都不应该与修改VIM主目录。这样就保证的VIM目录的整洁
+
+
 * 打开文件出现乱码，如何修改编码？
 
 文件出现了乱码一般是编码格式不对造成的。VIM中常用编码有
