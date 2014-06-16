@@ -20,23 +20,30 @@ set incsearch
 filetype on
 filetype plugin on
 filetype indent on
+
 """markdown文件使用utf8编码
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}  set fenc=utf8 sw=4 ts=4 
 
 
 
-
-"""""""""""""""""Vim语法""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
-"       条件判断: == 
-"       if <...>
-"               
-"       elseif <...>
-"               
-"       endif
-"
+"       将光标从其他窗口移动到Taglist窗口
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+function MoveCursorToTaglist()
+        let s:_cur_winnr = winnr()
+        let s:winnum =  bufwinnr(g:TagList_title)
+        if s:_cur_winnr == s:winnum 
+                exe s:_last_winnr . 'wincmd w'
+        else
+                exe s:winnum . 'wincmd w'
+                let s:_last_winnr = s:_cur_winnr
+        endif
+endfunction
+        
+
+
 
 
 """""""""""""""""Taglist""""""""""""""""""""""""""""""
@@ -49,11 +56,23 @@ let Tlist_Ctags_Cmd='ctags'
 let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_Right_Window = 1
+let Tlist_Auto_Open = 1
 
-map <silent> <leader>tl :TlistToogle<cr>
+
+""""""""""""""""""键映射""""""""""""""""""""""""""""""
+
+map <silent> <leader>tl :TlistToggle<cr>
+map <silent> <F7> :call MoveCursorToTaglist()<cr>       "从TagList窗口来回切换
+map <M-o> :A<cr>
+map <M-O> :A<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""自动更正
 iab sturct struct
+
+
+
 
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
