@@ -25,6 +25,17 @@ filetype indent on
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}  set fenc=utf8 sw=4 ts=4 
 
 
+"将光标在窗口的底和顶移动
+function MoveCursorToTopBottm()
+    let s:cur_line=line(".")
+    let s:top_line = line("w0")
+    let s:bottom_line = line("w$")
+    if s:cur_line != s:bottom_line 
+        exe "normal" (s:bottom_line - s:cur_line)."j"
+    else
+        exe "normal" (s:cur_line-s:top_line)."k"
+    endif
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -42,7 +53,16 @@ function MoveCursorToTaglist()
         endif
 endfunction
         
-
+function MyRun()
+    exe "w"
+    if &filetype == "markdown"
+            if has('win32')
+                    exe  'sil !start C:\Program Files (x86)\Google\Chrome\Application\chrome.exe %'
+            else
+                    exe "!open -a /Applications/Google\\ Chrome.app %"
+            endif
+    endif
+endfunction
 
 
 
@@ -60,9 +80,26 @@ let Tlist_Auto_Open = 1
 
 
 """"""""""""""""""键映射""""""""""""""""""""""""""""""
-
+let s:scriptpath = $HOME . "/.vim"
+if has('win32')
+        let s:scriptpath = $VIM
+        "exe "silent !set vim=".s:scriptpath
+endif
 map <silent> <leader>tl :TlistToggle<cr>
 map <silent> <F7> :call MoveCursorToTaglist()<cr>       "从TagList窗口来回切换
+
+"将选中行注释和取消注释
+if has('win32')
+        vmap <buffer> <leader>kc :!python \%VIM\%\\pycoment.py<cr>
+        vmap <buffer> <leader>ku :!python \%VIM\%\\pycoment.py 2<cr>
+else
+        vmap <buffer> <leader>kc :!python $HOME/.vim/pycoment.py<cr>
+        vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py 2<cr>
+endif
+
+"将光标移动到窗口顶部和底部
+nmap <space> :call MoveCursorToTopBottm()<cr>
+nmap <leader>rr :call MyRun()<cr>
 map <M-o> :A<cr>
 map <M-O> :A<cr>
 
@@ -103,3 +140,11 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
+
+" =========
+" 图形界面
+" =========
+if has('gui_running')
+        " 字体配置
+        exec 'set guifont='.'Consolas:h9:cANSI'
+endif
