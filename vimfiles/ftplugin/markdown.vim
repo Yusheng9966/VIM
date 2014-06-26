@@ -3,8 +3,6 @@
 " Maintainer:		Tim Pope <vimNOSPAM@tpope.org>
 " Last Change:		2010 May 21
 
-echo '***********************************************************************'
-
 if exists("b:did_ftplugin")
   finish
 endif

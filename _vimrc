@@ -25,6 +25,7 @@ filetype indent on
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}  set fenc=utf8 sw=4 ts=4 
 
 
+
 "将光标在窗口的底和顶移动
 function MoveCursorToTopBottm()
     let s:cur_line=line(".")
