@@ -53,6 +53,16 @@ function MoveCursorToTaglist()
         endif
 endfunction
         
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+"       设置脚本目录
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let s:scriptpath = $HOME . "/.vim"
+if has('win32')
+        let s:scriptpath = $VIM
+endif
+
 function MyRun()
     exe "w"
     if &filetype == "markdown"
@@ -61,6 +71,9 @@ function MyRun()
             else
                     exe "!open -a /Applications/Google\\ Chrome.app %"
             endif
+    endif
+    if &filetype == "c" || &filetype == "cpp"
+        exe '!python '.s:scriptpath.'\\pycompile.py m:\\src\\xcgMTCGPro2010.sln Debug x64 '
     endif
 endfunction
 
@@ -80,11 +93,6 @@ let Tlist_Auto_Open = 1
 
 
 """"""""""""""""""键映射""""""""""""""""""""""""""""""
-let s:scriptpath = $HOME . "/.vim"
-if has('win32')
-        let s:scriptpath = $VIM
-        "exe "silent !set vim=".s:scriptpath
-endif
 map <silent> <leader>tl :TlistToggle<cr>
 map <silent> <F7> :call MoveCursorToTaglist()<cr>       "从TagList窗口来回切换
 
