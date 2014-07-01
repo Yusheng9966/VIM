@@ -92,6 +92,8 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Auto_Open = 1
 
+"let g:clang_debug = 1
+let g:clang_library_path = "C:\\Program Files (x86)\\LLVM\\bin\\"
 
 """"""""""""""""""¼üÓ³Éä""""""""""""""""""""""""""""""
 map <silent> <leader>tl :TlistToggle<cr>
