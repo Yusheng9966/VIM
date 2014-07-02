@@ -53,6 +53,27 @@ VIM的整个环境都改成了utf8，这在linux下没有问题， 但在windows
 最终解决方案出来了。仅需要将`set fileencodeings=ucs-bom,utf8,gbk,cp936`加入到
 配置文件中就可以了。
 
+### `clang_complete`插件
+---
+`clang_complete`插件需要在项目的目录中加入`.clang_complete`文件进行配置。配置方法如下：
+
+* `.clang_complete`文件可以在项目工程里源文件的任何一级父目录，能找到就行。
+* 里面使用-I命令指定包含文件的目录。文件目录一定要用绝对路径。不能有空格。一般需要将mfc的目录和windows头文件都包含进去。
+-fms-extensions
+-fms-compatibility
+* 加入 `-fms-extensions`和`-fms-compatibility`对clang进行配置，大概是要启动对VC的扩展和对VC编译器的完全兼容
+* 示例：
+        -IC:\Progra~2\Micros~2.0\VC\include
+        -IC:\Progra~2\Micros~2.0\VC\ATLMFC\INCLUDE 
+        -IC:\Progra~2\Micros~1\Windows\v7.0A\include
+        -fms-extensions
+        -fms-compatibility
+
+        
+        
+
+        
+
 ### 更新日志
 
 [`update_log.md`](update_log.md)
