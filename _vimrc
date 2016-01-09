@@ -2,27 +2,48 @@ set nocompatible
 set fencs=ucs-bom,utf8,gbk,cp936
 
 """""""""""""""""""""""缩进""""""""""""""""""""""""""
-set shiftwidth=8
-set tabstop=8
+set tabstop=4
 set expandtab
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+
 set autoindent
 
 """""""""""""""""""""""显示""""""""""""""""""""""""""
 set number
+set ruler
+set rulerformat=%15(%c%V\ %p%%%)
 
+
+"显示匹配的括号
+set showmatch
 """""""""""""""""""""""Search""""""""""""""""""""""""
-set incsearch 
 set ignorecase
 set incsearch
+set hlsearch
+"set fdm=indent "设置缩进折叠方式
 
 
+syntax on
 """""""""""""""""""""""filetype""""""""""""""""""""""""
 filetype on
 filetype plugin on
 filetype indent on
 
-"""markdown文件使用utf8编码
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}  set fenc=utf8 sw=4 ts=4 
+"""""""""""""""""Taglist""""""""""""""""""""""""""""""
+"
+"       使用:TlistOpen打开taglist窗口
+"       使用:TlistClose关闭
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Ctags_Cmd='ctags'
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Auto_Open = 1
+
+ 
 
 
 
@@ -80,20 +101,10 @@ endfunction
 
 
 
-"""""""""""""""""Taglist""""""""""""""""""""""""""""""
-"
-"       使用:TlistOpen打开taglist窗口
-"       使用:TlistClose关闭
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Ctags_Cmd='ctags'
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Auto_Open = 1
 
 "let g:clang_debug = 1
 let g:clang_library_path = "C:\\Program Files (x86)\\LLVM\\bin\\"
+"let mapleader = ","
 
 """"""""""""""""""键映射""""""""""""""""""""""""""""""
 map <silent> <leader>tl :TlistToggle<cr>
@@ -108,11 +119,20 @@ else
         vmap <buffer> <leader>ku :!python $HOME/.vim/pycoment.py 2<cr>
 endif
 
+
+"""markdown文件使用utf8编码
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}  set fenc=utf8 sw=4 ts=4
+"""python 自动运行
+au BufRead *.py map <buffer> <leader>r :w<CR>:!python %<CR>
+
+
 "将光标移动到窗口顶部和底部
 nmap <space> :call MoveCursorToTopBottm()<cr>
 nmap <leader>rr :call MyRun()<cr>
+nmap <leader>ls :buffers<cr>
 map <M-o> :A<cr>
 map <M-O> :A<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -157,5 +177,6 @@ endfunction
 " =========
 if has('gui_running')
         " 字体配置
-        exec 'set guifont='.'Consolas:h9:cANSI'
+        exec 'set guifont='.'Consolas:h15:cANSI'
+        set autochdir
 endif
